@@ -1,7 +1,13 @@
-<!DOCTYPE html>
-<html>
-<body>
+---
+layout: default
+---
 <h1>柠檬Rimoe</h1>
-<p>The Pages is being built, please wait!</p>
-</body>
-</html>
+<p>The Pages is being built. </p>
+  <a href="https://github.com/unarimoe/unarimoe.github.io/tree/master/_blog">凝萌小记</a>
+  <a href="mailto:neagtronljl@gmail.com">send me a mail</a>
+<ul>
+  {% for post in site.posts %}
+    <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+  <a href="{{ site.baseurl }}">baseurl</a>
+</ul>
