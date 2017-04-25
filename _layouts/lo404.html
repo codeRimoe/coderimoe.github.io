@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% include head.html %}
+    <body>
+        <div id="particles-js">
+            <div class="content">
+                <h1>
+                    <span class="site-title">404</span>
+                </h1>
+                <p>
+                    </br>前面的路危险，我们无法继续前行。
+                    </br>Dangerous,We can not move forward.</br>
+                    <a class="link" href="http://rimoe.ml">返回首页-Home</a>
+                    <a class="link" target="_blank" href="https://blog.rimoe.ml">凝萌小记-Blog</a>
+                </p>
+                <p style="font-size:7px;"></br>{{site.username}} 2017 &copy; all right reserved</br>忘名社 <span class="love">❤</span> Una.</p>
+            </div>
+            <a class="down" href="http://rimoe.ml" data-scroll><i class="icon fa fa-chevron-down" aria-hidden="true"></i></a>
+        </div>
+        <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="{{ "/assets/js/sweet-scroll.min.js" | prepend: site.baseurl }}"></script>
+        <script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+        {% include google-analytics.html %}
+    </body>
+
+

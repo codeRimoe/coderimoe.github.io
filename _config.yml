@@ -1,0 +1,21 @@
+# Site settings
+title: 柠萌 - Rimoe
+description: This is a page for something useless.
+# url: "http://rimoe.ml"
+
+# User settings
+username: 柠萌
+user_description: .
+user_title: 作家是杂家
+email: negatronljl@gmail.com
+twitter_username: Haowen_Luo
+github_username:  coderimoe
+weibo_username:  negatron
+zhihu_username:  negatron
+facebook_username:  negatronljl
+
+# Google-analytics
+google-analytics:
+  id: ""
+
+exclude: ['package.json', 'src' , 'node_modules']
