@@ -14,11 +14,6 @@ var show_div = document.getElementById('sponsor');
 var bg_div = document.getElementById('fade');
 var click1=0,click2=0;
 
-function showpic(pic,e){
-    pic.style.left=(e.pageX)+"px";
-    pic.style.top=(e.pageY-132)+"px";
-    pic.style.display="block";
-}
 
 shareArea.onclick = function(){
     bb.style.display = 'block';
@@ -29,17 +24,31 @@ back.onclick = function(){
     shareArea.style.display = 'block';
 };
 
-shareArea.onclick = function(){
-bb.style.display = 'block';
-shareArea.style.display = 'none';
+ali.onclick = function(){
+    var e = event || window.event;
+    if(click1==0){
+        alp.style.left=(e.pageX)+"px";
+        alp.style.top=(e.pageY-132)+"px";
+        alp.style.display="block";
+        click1=1;
+    }
+    if(click1==1){
+        alp.style.display="none";
+        click1=0;
+    }
 };
-back.onclick = function(){
-bb.style.display = 'none';
-shareArea.style.display = 'block';
-};
+document.addEventListener('touchmove', function(event) {
+event.preventDefault();
+}, false);
 
 //鼠标移入分享区域，分享区域内容呈现
-ali.addEventListener("mouseover",showpic(alp,event || window.event),false);
+ali.addEventListener("mouseover",function(){
+    var e = event || window.event;
+    alp.style.left=(e.pageX)+"px";
+    alp.style.top=(e.pageY-132)+"px";
+    alp.style.display="block";
+    click1=1;
+},false);
 
 wc.addEventListener("mouseover",function(){
     var e = event || window.event;
@@ -52,6 +61,7 @@ wc.addEventListener("mouseover",function(){
 //鼠标移出分享区域，分享区域内容消失
 ali.addEventListener("mouseout",function(){
     alp.style.display="none";
+    click1=0;
 },false);
 
 wc.addEventListener("mouseout",function(){

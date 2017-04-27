@@ -22,12 +22,31 @@ back.onclick = function(){
     shareArea.style.display = 'block';
 };
 
+ali.addEventListener('touchstart',function(){
+    alp.style.left=(e.pageX)+"px";
+    alp.style.top=(e.pageY-132)+"px";
+    alp.style.display="block";
+},false);
+ali.addEventListener('touchend',function(){
+    alp.style.display="none";
+},false);
+
+wc.addEventListener('touchstart',function(){
+    alp.style.left=(e.pageX)+"px";
+    alp.style.top=(e.pageY-132)+"px";
+    alp.style.display="block";
+},false);
+wc.addEventListener('touchend',function(){
+    alp.style.display="none";
+},false);
+
 //鼠标移入分享区域，分享区域内容呈现
 ali.addEventListener("mouseover",function(){
     var e = event || window.event;
     alp.style.left=(e.pageX)+"px";
     alp.style.top=(e.pageY-132)+"px";
     alp.style.display="block";
+    click1=1;
 },false);
 
 wc.addEventListener("mouseover",function(){
@@ -41,6 +60,7 @@ wc.addEventListener("mouseover",function(){
 //鼠标移出分享区域，分享区域内容消失
 ali.addEventListener("mouseout",function(){
     alp.style.display="none";
+    click1=0;
 },false);
 
 wc.addEventListener("mouseout",function(){
