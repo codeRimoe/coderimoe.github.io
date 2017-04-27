@@ -12,6 +12,13 @@ alp.style.display = 'none';
 wcp.style.display = 'none';
 var show_div = document.getElementById('sponsor');
 var bg_div = document.getElementById('fade');
+var click1=0,click2=0;
+
+function showpic(pic,e){
+    pic.style.left=(e.pageX)+"px";
+    pic.style.top=(e.pageY-132)+"px";
+    pic.style.display="block";
+}
 
 shareArea.onclick = function(){
     bb.style.display = 'block';
@@ -22,13 +29,17 @@ back.onclick = function(){
     shareArea.style.display = 'block';
 };
 
+shareArea.onclick = function(){
+bb.style.display = 'block';
+shareArea.style.display = 'none';
+};
+back.onclick = function(){
+bb.style.display = 'none';
+shareArea.style.display = 'block';
+};
+
 //鼠标移入分享区域，分享区域内容呈现
-ali.addEventListener("mouseover",function(){
-    var e = event || window.event;
-    alp.style.left=(e.pageX)+"px";
-    alp.style.top=(e.pageY-132)+"px";
-    alp.style.display="block";
-},false);
+ali.addEventListener("mouseover",showpic(alp,event || window.event),false);
 
 wc.addEventListener("mouseover",function(){
     var e = event || window.event;
