@@ -7,11 +7,13 @@ var wc = document.getElementById('wechat');
 var bb = document.getElementById('bb');
 var alp = document.getElementById('alp');
 var wcp = document.getElementById('wcp');
+var lop = document.getElementById('lop');
+var loco = document.getElementById('loco');
+var xx = document.getElementById('xx');
 bb.style.display = 'none';
-alp.style.display = 'none';
-wcp.style.display = 'none';
-var show_div = document.getElementById('sponsor');
-var bg_div = document.getElementById('fade');
+xx.style.display = 'none';
+
+var click=0;
 
 shareArea.onclick = function(){
     bb.style.display = 'block';
@@ -22,49 +24,26 @@ back.onclick = function(){
     shareArea.style.display = 'block';
 };
 
-ali.addEventListener('touchstart',function(){
-    alp.style.left=(e.pageX)+"px";
-    alp.style.top=(e.pageY-132)+"px";
-    alp.style.display="block";
-},false);
-ali.addEventListener('touchend',function(){
-    alp.style.display="none";
-},false);
+ali.onclick = function(){
+    if(click==1){
+        loco.src=lop.src;
+        click=0;
+    }
+    else{
+        loco.src=alp.src;
+        click=1;
+    }
+};
 
-wc.addEventListener('touchstart',function(){
-    alp.style.left=(e.pageX)+"px";
-    alp.style.top=(e.pageY-132)+"px";
-    alp.style.display="block";
-},false);
-wc.addEventListener('touchend',function(){
-    alp.style.display="none";
-},false);
-
-//鼠标移入分享区域，分享区域内容呈现
-ali.addEventListener("mouseover",function(){
-    var e = event || window.event;
-    alp.style.left=(e.pageX)+"px";
-    alp.style.top=(e.pageY-132)+"px";
-    alp.style.display="block";
-    click1=1;
-},false);
-
-wc.addEventListener("mouseover",function(){
-    var e = event || window.event;
-    wcp.style.left=(e.pageX)+"px";
-    wcp.style.top=(e.pageY-132)+"px";
-    wcp.style.display="block";
-
-},false);
-
-//鼠标移出分享区域，分享区域内容消失
-ali.addEventListener("mouseout",function(){
-    alp.style.display="none";
-    click1=0;
-},false);
-
-wc.addEventListener("mouseout",function(){
-   wcp.style.display="none";
-},false);
+wc.onclick = function(){
+    if(click==2){
+        loco.src=lop.src;
+        click=0;
+    }
+    else{
+        loco.src=wcp.src;
+        click=2;
+    }
+};
 
 }
