@@ -22,6 +22,7 @@ shareArea.onclick = function(){
 back.onclick = function(){
     bb.style.display = 'none';
     shareArea.style.display = 'block';
+    loco.src=lop.src;
 };
 
 ali.onclick = function(){
