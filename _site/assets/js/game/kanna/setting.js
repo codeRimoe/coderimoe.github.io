@@ -77,7 +77,7 @@ c1.onclick = function(){
         case -90:screentype=2;break;// Landscape: turned 90 degrees counter-clockwise
         case 90:screentype=3;break;
     }
-    
+    alert(screentype);
 
 };
 
@@ -86,7 +86,6 @@ c2.onclick = function(){
         hhh++,hhh%=2,menu(mainctx,statectx);
     if(mmm&&los)
         ppp=pause(mainctx,statectx,ppp);
-    alert(screentype);
 };
 
 touch = function (A,B,dis){
