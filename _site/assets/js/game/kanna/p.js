@@ -4,14 +4,6 @@ var mainctx = main.getContext("2d");
 var state = document.getElementById("stateCanvas");
 var statectx = state.getContext("2d");
 
-var con=document.getElementById("con");
-
-resize = function () {
-    var scale=Math.min(document.body.clientWidth/CBW,window.innerHeight/CBH-0.25);
-    con.style.zoom=scale;
-}
-
-
 var CBH=600,CBW=1080,bexptime=150,maxwt=300,wk=50;
 var inithp=10,initspd=5,initboom=8,initzz=5;
 var inithp_M=5,initspd_M=3;
@@ -36,58 +28,6 @@ addEventListener("keyup", function (e) {
                  case 72:if(!mmm){hhh++,hhh%=2,menu(mainctx,statectx);}break;
                  }
                  }, false);
-
-var screentype=[0,0,0,0],initdeg=[0,0],perdeg=[0,0];
-if(device.mobile()){
-    window.addEventListener("deviceorientation", function(event) {
-                            perdeg[0]=event.beta;
-                            perdeg[0]=event.gamma;
-                            var x = (event.beta+180-initdeg[0])%360-180;  // In degree in the range [-180,180]
-                            var y = (event.gamma+90-initdeg[1])%180-90; // In degree in the range [-90,90]
-                            if(x>5)
-                                keysDown[40] = true;
-                            else if(x<-5)
-                                keysDown[38] = true;
-                            else if(x<5&&x>-5){
-                                if(keysDown[38])delete keysDown[38];
-                                if(keysDown[40])delete keysDown[40];
-                            }
-                            
-                            if(y>5)
-                                keysDown[39] = true;
-                            else if(y<-5)
-                                keysDown[37] = true;
-                            else if(y<5&&y>-5){
-                                if(keysDown[39])delete keysDown[39];
-                                if(keysDown[37])delete keysDown[37];
-                            }
-                            }, true);
-}
-
-c1.onclick = function(){
-    if(!mmm)
-        mmm=1;
-    if((ppp&&los&&mmm)&&(boomper--==1))
-        kanna.setB(boom_pool);
-    if((!ppp)||(!los))
-        reset(),menu(mainctx,statectx);
-    switch(window.orientation) {
-        case 0:screentype=4;break;
-        case 180:screentype=1;break
-        case -90:screentype=2;break;// Landscape: turned 90 degrees counter-clockwise
-        case 90:screentype=3;break;
-    }
-    
-
-};
-
-c2.onclick = function(){
-    if(!mmm)
-        hhh++,hhh%=2,menu(mainctx,statectx);
-    if(mmm&&los)
-        ppp=pause(mainctx,statectx,ppp);
-    alert(screentype);
-};
 
 touch = function (A,B,dis){
     var dx = Math.abs(A.x-B.x);
