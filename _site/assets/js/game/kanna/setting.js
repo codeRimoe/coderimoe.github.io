@@ -7,8 +7,16 @@ var statectx = state.getContext("2d");
 var con=document.getElementById("con");
 
 resize = function () {
-    var scale=Math.min(document.body.clientWidth/CBW,window.innerHeight/CBH-0.25);
-    con.style.zoom=scale;
+    if(device.mobile()){
+        var scale=Math.min(document.body.clientWidth/CBW,window.innerHeight/CBH-0.25);
+        con.style.zoom=scale;
+        switch(window.orientation) {
+            case 0:screentype=0;break;//down
+            case 180:screentype=2;break;//up
+            case -90:screentype=3;break;//right Landscape: turned 90 degrees counter-clockwise
+            case 90:screentype=1;break;//left
+        }
+    }
 }
 
 
@@ -37,56 +45,52 @@ addEventListener("keyup", function (e) {
                  }
                  }, false);
 
-var screentype=[0,0,0,0],initdeg=[0,0],perdeg=[0,0];
+var screentype=0,initdeg=[0,0],perdeg=[0,0];var x;
 if(device.mobile()){
     window.addEventListener("deviceorientation", function(event) {
                             perdeg[0]=event.beta;
-                            perdeg[0]=event.gamma;
-                            var x = (event.beta+180-initdeg[0])%360-180;  // In degree in the range [-180,180]
+                            perdeg[1]=event.gamma;
+                            x = (event.beta+180-initdeg[0])%360-180;  // In degree in the range [-180,180]
                             var y = (event.gamma+90-initdeg[1])%180-90; // In degree in the range [-90,90]
                             if(x>5)
-                                keysDown[40] = true;
+                            keysDown[37+(3+screentype)%4] = true;
                             else if(x<-5)
-                                keysDown[38] = true;
+                            keysDown[37+(1+screentype)%4] = true;
                             else if(x<5&&x>-5){
-                                if(keysDown[38])delete keysDown[38];
-                                if(keysDown[40])delete keysDown[40];
+                            if(keysDown[37+(1+screentype)%4])delete keysDown[37+(1+screentype)%4];
+                            if(keysDown[37+(3+screentype)%4])delete keysDown[37+(3+screentype)%4];
                             }
                             
                             if(y>5)
-                                keysDown[39] = true;
+                            keysDown[37+(2+screentype)%4] = true;
                             else if(y<-5)
-                                keysDown[37] = true;
+                            keysDown[37+(0+screentype)%4] = true;
                             else if(y<5&&y>-5){
-                                if(keysDown[39])delete keysDown[39];
-                                if(keysDown[37])delete keysDown[37];
+                            if(keysDown[37+(2+screentype)%4])delete keysDown[37+(2+screentype)%4];
+                            if(keysDown[37+(0+screentype)%4])delete keysDown[37+(0+screentype)%4];
                             }
                             }, true);
+    
+    c1.onclick = function(){
+        if(!mmm){
+            mmm=1;
+            initdeg[0]=perdeg[0];
+            initdeg[1]=perdeg[1];
+        }
+        if((ppp&&los&&mmm)&&(boomper--==1))
+            kanna.setB(boom_pool);
+        if((!ppp)||(!los))
+            reset(),menu(mainctx,statectx);
+    };
+    
+    c2.onclick = function(){
+        if(!mmm)
+            hhh++,hhh%=2,menu(mainctx,statectx);
+        if(mmm&&los)
+            ppp=pause(mainctx,statectx,ppp);
+    };
+    
 }
-
-c1.onclick = function(){
-    if(!mmm)
-        mmm=1;
-    if((ppp&&los&&mmm)&&(boomper--==1))
-        kanna.setB(boom_pool);
-    if((!ppp)||(!los))
-        reset(),menu(mainctx,statectx);
-    switch(window.orientation) {
-        case 0:screentype=4;break;
-        case 180:screentype=1;break
-        case -90:screentype=2;break;// Landscape: turned 90 degrees counter-clockwise
-        case 90:screentype=3;break;
-    }
-    alert(screentype);
-
-};
-
-c2.onclick = function(){
-    if(!mmm)
-        hhh++,hhh%=2,menu(mainctx,statectx);
-    if(mmm&&los)
-        ppp=pause(mainctx,statectx,ppp);
-};
 
 touch = function (A,B,dis){
     var dx = Math.abs(A.x-B.x);
@@ -97,6 +101,10 @@ touch = function (A,B,dis){
 }
 
 pause = function(mainctx,statectx,ppp){
+    if(device.mobile()){
+        initdeg[0]=perdeg[0];
+        initdeg[1]=perdeg[1];
+    }
     if(ppp){
         mainctx.drawImage(pausepic, 0, 0);
         statectx.clearRect(0, 0, CBW, 100);
@@ -114,7 +122,7 @@ lose = function(mainctx,statectx){
 }
 
 win = function(mainctx,statectx){
-
+    
     alert("Congratulations! You Win!\nKill:"+allkill+"   Time:"+(maxwt-wt));
     mainctx.drawImage(winpic, 0, 0);
     statectx.drawImage(pbg[1], 0, 0);

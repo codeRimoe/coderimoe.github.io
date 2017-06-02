@@ -16,8 +16,6 @@ resize = function () {
             case -90:screentype=3;break;//right Landscape: turned 90 degrees counter-clockwise
             case 90:screentype=1;break;//left
         }
-        for(var i=37;i<41;i++)
-            if(keysDown[i])delete keysDown[i];
     }
 }
 
@@ -47,12 +45,12 @@ addEventListener("keyup", function (e) {
                  }
                  }, false);
 
-var screentype=0,initdeg=[0,0],perdeg=[0,0];
+var screentype=0,initdeg=[0,0],perdeg=[0,0];var x;
 if(device.mobile()){
     window.addEventListener("deviceorientation", function(event) {
                             perdeg[0]=event.beta;
                             perdeg[1]=event.gamma;
-                            var x = (event.beta+180-initdeg[0])%360-180;  // In degree in the range [-180,180]
+                            x = (event.beta+180-initdeg[0])%360-180;  // In degree in the range [-180,180]
                             var y = (event.gamma+90-initdeg[1])%180-90; // In degree in the range [-90,90]
                             if(x>5)
                             keysDown[37+(3+screentype)%4] = true;
@@ -60,7 +58,7 @@ if(device.mobile()){
                             keysDown[37+(1+screentype)%4] = true;
                             else if(x<5&&x>-5){
                             if(keysDown[37+(1+screentype)%4])delete keysDown[37+(1+screentype)%4];
-                            if(keysDown[37+(3+screentype)%4])delete keysDown[40];
+                            if(keysDown[37+(3+screentype)%4])delete keysDown[37+(3+screentype)%4];
                             }
                             
                             if(y>5)
