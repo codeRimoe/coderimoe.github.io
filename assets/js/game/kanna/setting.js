@@ -7,9 +7,9 @@ var statectx = state.getContext("2d");
 var con=document.getElementById("con");
 
 resize = function () {
-    if(device.mobile()){
-        var scale=Math.min(document.body.clientWidth/CBW,window.innerHeight/CBH-0.25);
-        con.style.zoom=scale;
+    var scale=Math.min(document.body.clientWidth/CBW,window.innerHeight/CBH-0.25);
+    con.style.zoom=scale;
+    if(!device.mobile()){
         switch(window.orientation) {
             case 0:screentype=0;break;//down
             case 180:screentype=2;break;//up
@@ -48,24 +48,24 @@ addEventListener("keyup", function (e) {
 var screentype=0;
 if(device.mobile()){
     window.addEventListener("deviceorientation", function(event) {
-                            x = (event.beta+180-initdeg[0])%360-180;  // In degree in the range [-180,180]
-                            var y = (event.gamma+90-initdeg[1])%180-90; // In degree in the range [-90,90]
+                            x = (event.beta+180)%360-180;  // In degree in the range [-180,180]
+                            var y = (event.gamma+90)%180-90; // In degree in the range [-90,90]
                             if(x>5)
-                            keysDown[37+(3+screentype)%4] = true;
+                                keysDown[37+(3+screentype)%4] = true;
                             else if(x<-5)
-                            keysDown[37+(1+screentype)%4] = true;
+                                keysDown[37+(1+screentype)%4] = true;
                             else if(x<5&&x>-5){
-                            if(keysDown[37+(1+screentype)%4])delete keysDown[37+(1+screentype)%4];
-                            if(keysDown[37+(3+screentype)%4])delete keysDown[37+(3+screentype)%4];
+                                if(keysDown[37+(1+screentype)%4])delete keysDown[37+(1+screentype)%4];
+                                if(keysDown[37+(3+screentype)%4])delete keysDown[37+(3+screentype)%4];
                             }
                             
                             if(y>5)
-                            keysDown[37+(2+screentype)%4] = true;
+                                keysDown[37+(2+screentype)%4] = true;
                             else if(y<-5)
-                            keysDown[37+(0+screentype)%4] = true;
+                                keysDown[37+(0+screentype)%4] = true;
                             else if(y<5&&y>-5){
-                            if(keysDown[37+(2+screentype)%4])delete keysDown[37+(2+screentype)%4];
-                            if(keysDown[37+(0+screentype)%4])delete keysDown[37+(0+screentype)%4];
+                                if(keysDown[37+(2+screentype)%4])delete keysDown[37+(2+screentype)%4];
+                                if(keysDown[37+(0+screentype)%4])delete keysDown[37+(0+screentype)%4];
                             }
                             }, true);
     
@@ -84,7 +84,7 @@ if(device.mobile()){
         if(mmm&&los)
             ppp=pause(mainctx,statectx,ppp);
     };
-    
+
 }
 
 touch = function (A,B,dis){
@@ -113,7 +113,7 @@ lose = function(mainctx,statectx){
 }
 
 win = function(mainctx,statectx){
-    
+
     alert("Congratulations! You Win!\nKill:"+allkill+"   Time:"+(maxwt-wt));
     mainctx.drawImage(winpic, 0, 0);
     statectx.drawImage(pbg[1], 0, 0);
