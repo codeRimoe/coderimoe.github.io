@@ -9,7 +9,7 @@ var con=document.getElementById("con");
 resize = function () {
     var scale=Math.min(document.body.clientWidth/CBW,window.innerHeight/CBH-0.25);
     con.style.zoom=scale;
-    if(!device.mobile()){
+    if(device.mobile()){
         switch(window.orientation) {
             case 0:screentype=0;break;//down
             case 180:screentype=2;break;//up

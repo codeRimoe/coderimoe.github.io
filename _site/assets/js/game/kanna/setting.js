@@ -7,14 +7,14 @@ var statectx = state.getContext("2d");
 var con=document.getElementById("con");
 
 resize = function () {
+    var scale=Math.min(document.body.clientWidth/CBW,window.innerHeight/CBH-0.25);
+    con.style.zoom=scale;
     if(device.mobile()){
-        var scale=Math.min(document.body.clientWidth/CBW,window.innerHeight/CBH-0.25);
-        con.style.zoom=scale;
         switch(window.orientation) {
             case 0:screentype=0;break;//down
             case 180:screentype=2;break;//up
-            case -90:screentype=3;break;//right Landscape: turned 90 degrees counter-clockwise
-            case 90:screentype=1;break;//left
+            case -90:screentype=1;break;//right Landscape: turned 90 degrees counter-clockwise
+            case 90:screentype=3;break;//left
         }
     }
 }
@@ -45,38 +45,33 @@ addEventListener("keyup", function (e) {
                  }
                  }, false);
 
-var screentype=0,initdeg=[0,0],perdeg=[0,0];var x;
+var screentype=0;
 if(device.mobile()){
     window.addEventListener("deviceorientation", function(event) {
-                            perdeg[0]=event.beta;
-                            perdeg[1]=event.gamma;
-                            x = (event.beta+180-initdeg[0])%360-180;  // In degree in the range [-180,180]
-                            var y = (event.gamma+90-initdeg[1])%180-90; // In degree in the range [-90,90]
+                            var x = (event.beta+180)%360-180;  // In degree in the range [-180,180]
+                            var y = (event.gamma+90)%180-90; // In degree in the range [-90,90]
                             if(x>5)
-                            keysDown[37+(3+screentype)%4] = true;
+                                keysDown[37+(3+screentype)%4] = true;
                             else if(x<-5)
-                            keysDown[37+(1+screentype)%4] = true;
+                                keysDown[37+(1+screentype)%4] = true;
                             else if(x<5&&x>-5){
-                            if(keysDown[37+(1+screentype)%4])delete keysDown[37+(1+screentype)%4];
-                            if(keysDown[37+(3+screentype)%4])delete keysDown[37+(3+screentype)%4];
+                                if(keysDown[37+(1+screentype)%4])delete keysDown[37+(1+screentype)%4];
+                                if(keysDown[37+(3+screentype)%4])delete keysDown[37+(3+screentype)%4];
                             }
                             
                             if(y>5)
-                            keysDown[37+(2+screentype)%4] = true;
+                                keysDown[37+(2+screentype)%4] = true;
                             else if(y<-5)
-                            keysDown[37+(0+screentype)%4] = true;
+                                keysDown[37+(0+screentype)%4] = true;
                             else if(y<5&&y>-5){
-                            if(keysDown[37+(2+screentype)%4])delete keysDown[37+(2+screentype)%4];
-                            if(keysDown[37+(0+screentype)%4])delete keysDown[37+(0+screentype)%4];
+                                if(keysDown[37+(2+screentype)%4])delete keysDown[37+(2+screentype)%4];
+                                if(keysDown[37+(0+screentype)%4])delete keysDown[37+(0+screentype)%4];
                             }
                             }, true);
     
     c1.onclick = function(){
-        if(!mmm){
+        if(!mmm)
             mmm=1;
-            initdeg[0]=perdeg[0];
-            initdeg[1]=perdeg[1];
-        }
         if((ppp&&los&&mmm)&&(boomper--==1))
             kanna.setB(boom_pool);
         if((!ppp)||(!los))
@@ -89,7 +84,7 @@ if(device.mobile()){
         if(mmm&&los)
             ppp=pause(mainctx,statectx,ppp);
     };
-    
+
 }
 
 touch = function (A,B,dis){
@@ -101,10 +96,6 @@ touch = function (A,B,dis){
 }
 
 pause = function(mainctx,statectx,ppp){
-    if(device.mobile()){
-        initdeg[0]=perdeg[0];
-        initdeg[1]=perdeg[1];
-    }
     if(ppp){
         mainctx.drawImage(pausepic, 0, 0);
         statectx.clearRect(0, 0, CBW, 100);
@@ -122,7 +113,7 @@ lose = function(mainctx,statectx){
 }
 
 win = function(mainctx,statectx){
-    
+
     alert("Congratulations! You Win!\nKill:"+allkill+"   Time:"+(maxwt-wt));
     mainctx.drawImage(winpic, 0, 0);
     statectx.drawImage(pbg[1], 0, 0);
@@ -145,51 +136,3 @@ reset = function(){
     for(i = 0; i < kanna.boom;i++)
         boom_pool.push(new B(bing,-233,-233,0,0));
 }
-
-var kimg = [new Image(),new Image()];
-var ming = [new Image(),new Image(),new Image(),new Image()];
-var bing = [new Image(),new Image(),new Image(),new Image(),new Image(),new Image()];
-var ling = [new Image(),new Image()];
-var stpic =[new Image(),new Image(),new Image(),new Image(),new Image(),new Image(),new Image(),new Image()];
-var losepic=new Image();
-var winpic=new Image();
-var pausepic=new Image();
-var sbgmain = [new Image(),new Image()];
-var sbgst = [new Image(),new Image()];
-var pbg=[new Image(),new Image()];
-var stbg = new Image();
-var bg = new Image();
-
-kimg[0].src = "/assets/img/game/kanna/figure/kn.png";
-kimg[1].src = "/assets/img/game/kanna/figure/kn2.png";
-ling[0].src = "/assets/img/game/kanna/figure/xl.png";
-ling[1].src = "/assets/img/game/kanna/figure/xl2.png";
-ming[0].src = "/assets/img/game/kanna/figure/tr1.png";
-ming[1].src = "/assets/img/game/kanna/figure/tr2.png";
-ming[2].src = "/assets/img/game/kanna/figure/tr3.png";
-ming[3].src = "/assets/img/game/kanna/figure/tr4.png";
-bing[0].src = "/assets/img/game/kanna/boom/boom1.png";
-bing[1].src = "/assets/img/game/kanna/boom/boom2.png";
-bing[2].src = "/assets/img/game/kanna/boom/boom3.png";
-bing[3].src = "/assets/img/game/kanna/boom/boom4.png";
-bing[4].src = "/assets/img/game/kanna/boom/boom5.png";
-bing[5].src = "/assets/img/game/kanna/boom/boom6.png";
-stpic[0].src = "/assets/img/game/kanna/state/udoff.png";
-stpic[1].src = "/assets/img/game/kanna/state/sdoff.png";
-stpic[2].src = "/assets/img/game/kanna/state/disoff.png";
-stpic[3].src = "/assets/img/game/kanna/state/dzoff.png";
-stpic[4].src = "/assets/img/game/kanna/state/udon.png";
-stpic[5].src = "/assets/img/game/kanna/state/sdon.png";
-stpic[6].src = "/assets/img/game/kanna/state/dison.png";
-stpic[7].src = "/assets/img/game/kanna/state/dzon.png";
-losepic.src = "/assets/img/game/kanna/lose.png";
-winpic.src = "/assets/img/game/kanna/win.png";
-pausepic.src = "/assets/img/game/kanna/pause.png";
-stbg.src = "/assets/img/game/kanna/bg.png";
-pbg[0].src = "/assets/img/game/kanna/pbg.png";
-pbg[1].src = "/assets/img/game/kanna/ebg.png";
-sbgmain[0].src = "/assets/img/game/kanna/menu.png";
-sbgmain[1].src = "/assets/img/game/kanna/help.png";
-sbgst[0].src = "/assets/img/game/kanna/sbg.png";
-sbgst[1].src = "/assets/img/game/kanna/hbg.png";
-bg.src = "/assets/img/game/kanna/background.png";

@@ -35,29 +35,14 @@ stpic[4].src = "/assets/img/game/kanna/state/udon.png";
 stpic[5].src = "/assets/img/game/kanna/state/sdon.png";
 stpic[6].src = "/assets/img/game/kanna/state/dison.png";
 stpic[7].src = "/assets/img/game/kanna/state/dzon.png";
-
-if(device.mobile()){
-    losepic.src = "/assets/img/game/kanna/mobile/lose.png";
-    winpic.src = "/assets/img/game/kanna/mobile/win.png";
-    pausepic.src = "/assets/img/game/kanna/mobile/ppp.png";
-    pbg[0].src = "/assets/img/game/kanna/mobile/pbg.png";
-    pbg[1].src = "/assets/img/game/kanna/mobile/ebg.png";
-    sbgmain[0].src = "/assets/img/game/kanna/mobile/menu.png";
-    sbgmain[1].src = "/assets/img/game/kanna/mobile/help.png";
-    sbgst[0].src = "/assets/img/game/kanna/mobile/sbg.png";
-    sbgst[1].src = "/assets/img/game/kanna/mobile/hbg.png";
-}
-else {
-    losepic.src = "/assets/img/game/kanna/pc/lose.png";
-    winpic.src = "/assets/img/game/kanna/pc/win.png";
-    pausepic.src = "/assets/img/game/kanna/pc/ppp.png";
-    pbg[0].src = "/assets/img/game/kanna/pc/pbg.png";
-    pbg[1].src = "/assets/img/game/kanna/pc/ebg.png";
-    sbgmain[0].src = "/assets/img/game/kanna/pc/menu.png";
-    sbgmain[1].src = "/assets/img/game/kanna/pc/help.png";
-    sbgst[0].src = "/assets/img/game/kanna/pc/sbg.png";
-    sbgst[1].src = "/assets/img/game/kanna/pc/hbg.png";
-}
-
+losepic.src = "/assets/img/game/kanna/lose.png";
+winpic.src = "/assets/img/game/kanna/win.png";
+pausepic.src = "/assets/img/game/kanna/pause.png";
 stbg.src = "/assets/img/game/kanna/bg.png";
+pbg[0].src = "/assets/img/game/kanna/pbg.png";
+pbg[1].src = "/assets/img/game/kanna/ebg.png";
+sbgmain[0].src = "/assets/img/game/kanna/menu.png";
+sbgmain[1].src = "/assets/img/game/kanna/help.png";
+sbgst[0].src = "/assets/img/game/kanna/sbg.png";
+sbgst[1].src = "/assets/img/game/kanna/hbg.png";
 bg.src = "/assets/img/game/kanna/background.png";
