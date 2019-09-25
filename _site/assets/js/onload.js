@@ -70,6 +70,7 @@ window.onload = function(){
         bb.style.display = 'none';
         shareArea.style.display = 'block';
         loco.src=lop.src;
+        click=0;
     };
 
     ali.onclick = function(){
