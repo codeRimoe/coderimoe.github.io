@@ -8,7 +8,7 @@ window.onload = function(){
         // code for IE6, IE5
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xmlhttp.open("GET","http://demo.rimoe.xyz/element/list.xml",false);
+    xmlhttp.open("GET","https://demo.rimoe.xyz/element/list.xml",false);
     xmlhttp.send();
     xmlDoc=xmlhttp.responseXML;
     x=xmlDoc.getElementsByTagName("demo");
@@ -81,6 +81,7 @@ window.onload = function(){
             loco.src=alp.src;
             click=1;
         }
+        console.log(click)
     };
 
     wc.onclick = function(){
